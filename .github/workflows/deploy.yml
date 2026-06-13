@@ -27,4 +27,4 @@ jobs:
 
             docker compose down
 
-            docker compose up --build -deploy
+            docker compose up --build -d
