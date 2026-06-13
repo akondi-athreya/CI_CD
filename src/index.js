@@ -7,7 +7,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.get("/", (req, res)=> {
-    res.send("<h1>Hello World</h1>");
+    res.send("<h1>Hello World v2</h1>");
 });
 
 let counter = 0;
