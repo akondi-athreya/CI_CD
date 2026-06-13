@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to AWS EC2 vis SSH
+        uses: appleboy.ssh-action@1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            cd "/home/ubuntu/CI_CD"
+
+            git pull origin main
+
+            docker compose down
+
+            docker compose up --build -deploy
